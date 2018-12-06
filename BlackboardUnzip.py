@@ -41,7 +41,7 @@ for f in os.listdir(extract_dir):
 
         metafile = open(extract_dir + f).readlines()
         meta_student_name = metafile[0]
-        meta_student_file = metafile[-1]
+        meta_student_file = metafile[-2]
 
         # tekstbestand openen met info: regel 1= naam van student, laatste regel is bestandsnaam
         if (metafile[0].startswith("Naam:")):  # signature of a valid metadata file: starts with 'Naam:'
@@ -55,7 +55,7 @@ for f in os.listdir(extract_dir):
                 print("=== warning: could not create folder. Already existing?... Operation will continue...")
 
             # move the files to the student directories. Unzip were necessary
-            clean_student_file = meta_student_file.strip("\n")
+            clean_student_file = meta_student_file.strip("\n").lstrip("\tBestandsnaam: ")
 
             print("=== copy file to " + extract_dir + clean_student_name + "/" + clean_student_file)
             if (clean_student_file.endswith(".zip")):
